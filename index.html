@@ -11,38 +11,39 @@
     <title>Check Weather</title>
 </head>
 
-<body class="flex-column min-100-vh">
-    <header class="hero">
-      <h1 class="app-title"><i ></i> Weather Dashboard</h1>
-      <p>Search for a city and get its weather report!</p>
-    </header>
-  
-    <main class="flex-row justify-space-between">
-      <div class="col-12 col-md-4">
-  
-        <div class="card">
-          <h3 class="card-header text-uppercase">Search for a City</h3>
-          <form id="user-form" class="card-body">
-            <label class="form-label" for="username">City:</label>
-            <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-            <button type="submit" class="btn">Get City</button>
-          </form>
-        </div>
-  
-        <div class="card">
-          <div id="language-buttons" class="card-body">
-            <button data-language="javascript" class="btn">JavaScript</button>
-            <button data-language="html" class="btn">HTML</button>
-            <button data-language="css" class="btn">CSS</button>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-12 col-md-8">
-        <h2 class="subtitle">Previously Viewed Cities: <span id="repo-search-term"></span></h2>
-        <div id="repos-container" class="list-group"></div>
-      </div>
-    </main>
+<body>
+    <h1>Weather Dashboard</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-xl-3 colOne">
+                <label>Search for a City:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control textVal" placeholder="Denver">
+                    <div class="input-group-append btnPar">
+                        <button class="btn btn-primary search" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="container cityHist"></div>
+            </div>
+
+            <div class="col-12 col-md-9 col-xl-9 colTwo">
+                <div class="row today">
+                    <div class="card bg-light mb-3 " style="max-width: 400px;">
+                        <h2 class="card-header cardTodayCityName"></h2>
+                        <h3 class="card-header cardTodayDate"></h3>
+                        <img class="icons" />
+                        <div class="card-body cardBodyToday">
+                        </div>
+                    </div>
+                </div>
+                <div class="row fiveForecast"></div>
+            </div>
+            
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
+
 </html>
