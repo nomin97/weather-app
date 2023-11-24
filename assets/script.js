@@ -1,5 +1,4 @@
 var key = "c95c03c09b77ad88cba652acda2d901e";
-// getWeather(Denver);
 var city = "Denver"
 
 //Grabs the current time and date
