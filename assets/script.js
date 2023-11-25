@@ -6,7 +6,7 @@ var date = moment().format('dddd, MMMM Do YYYY');
 var dateTime = moment().format('YYYY-MM-DD HH:MM:SS')
 
 var cityHistory = [];
-//Will save the text value of the search and save it to an array and storage
+//saves history to search history and adds to local storage
 $('.search').on("click", function (event) {
 	event.preventDefault();
 	city = $(this).parent('.btnPar').siblings('.textVal').val().trim();
@@ -40,7 +40,6 @@ function getHistory() {
 	} if (!city) {
 		return;
 	}
-	//Allows the buttons to start a search as well
 	$('.histBtn').on("click", function (event) {
 		event.preventDefault();
 		city = $(this).text();
@@ -49,40 +48,29 @@ function getHistory() {
 	});
 };
 
-//Grab the main 'Today' card body.
+//gets weather data for today
 var cardTodayBody = $('.cardBodyToday')
-//Applies the weather data to the today card and then launches the five day forecast
 function getWeatherToday() {
 	var getUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${key}`;
-
 	$(cardTodayBody).empty();
-
 	$.ajax({
 		url: getUrlCurrent,
 		method: 'GET',
 	}).then(function (response) {
 		$('.cardTodayCityName').text(response.name);
 		$('.cardTodayDate').text(date);
-		//Icons
 		$('.icons').attr('src', `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
-		// Temperature
 		var pEl = $('<p>').text(`Temperature: ${response.main.temp} °F`);
 		cardTodayBody.append(pEl);
-		//Feels Like
 		var pElTemp = $('<p>').text(`Feels Like: ${response.main.feels_like} °F`);
 		cardTodayBody.append(pElTemp);
-		//Humidity
 		var pElHumid = $('<p>').text(`Humidity: ${response.main.humidity} %`);
 		cardTodayBody.append(pElHumid);
-		//Wind Speed
 		var pElWind = $('<p>').text(`Wind Speed: ${response.wind.speed} MPH`);
 		cardTodayBody.append(pElWind);
-		//Set the lat and long from the searched city
+		// just city name wont get data, this gets coordinates
 		var cityLon = response.coord.lon;
-		// console.log(cityLon);
 		var cityLat = response.coord.lat;
-		// console.log(cityLat);
-
 		var getUrlUvi = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=hourly,daily,minutely&appid=${key}`;
 
 		$.ajax({
@@ -94,7 +82,6 @@ function getWeatherToday() {
 			var uvi = response.current.uvi;
 			pElUvi.append(uviSpan);
 			cardTodayBody.append(pElUvi);
-			//set the UV index to match an exposure chart severity based on color 
 			if (uvi >= 0 && uvi <= 2) {
 				uviSpan.attr('class', 'green');
 			} else if (uvi > 2 && uvi <= 5) {
@@ -112,17 +99,14 @@ function getWeatherToday() {
 };
 
 var fiveForecastEl = $('.fiveForecast');
-
 function getFiveDayForecast() {
 	var getUrlFiveDay = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${key}`;
-
 	$.ajax({
 		url: getUrlFiveDay,
 		method: 'GET',
 	}).then(function (response) {
 		var fiveDayArray = response.list;
 		var myWeather = [];
-		//Made a object that would allow for easier data read
 		$.each(fiveDayArray, function (index, value) {
 			testObj = {
 				date: value.dt_txt.split(' ')[0],
@@ -137,9 +121,7 @@ function getFiveDayForecast() {
 				myWeather.push(testObj);
 			}
 		})
-		//Inject the cards to the screen 
 		for (let i = 0; i < myWeather.length; i++) {
-
 			var divElCard = $('<div>');
 			divElCard.attr('class', 'card text-white bg-primary mb-3 cardOne');
 			divElCard.attr('style', 'max-width: 200px;');
@@ -160,24 +142,18 @@ function getFiveDayForecast() {
 			divElIcon.attr('src', `https://openweathermap.org/img/wn/${myWeather[i].icon}@2x.png`);
 			divElBody.append(divElIcon);
 
-			//Temp
 			var pElTemp = $('<p>').text(`Temperature: ${myWeather[i].temp} °F`);
 			divElBody.append(pElTemp);
-			//Feels Like
 			var pElFeel = $('<p>').text(`Feels Like: ${myWeather[i].feels_like} °F`);
 			divElBody.append(pElFeel);
-			//Humidity
 			var pElHumid = $('<p>').text(`Humidity: ${myWeather[i].humidity} %`);
 			divElBody.append(pElHumid);
 		}
 	});
 };
 
-//Allows for the example data to load for Denver
 function initLoad() {
-
 	var cityHistoryStore = JSON.parse(localStorage.getItem('city'));
-
 	if (cityHistoryStore !== null) {
 		cityHistory = cityHistoryStore
 	}
