@@ -9,6 +9,7 @@ User just has to open the deployed page and start using.
 ## Usage
 User just has to open the deployed page and start using. 
 ! [Image of deployed page](./assets/images/Screen%20Shot%202023-11-24%20at%205.14.29%20PM.png)
+https://nomin97.github.io/weather-app/
 
 ## Credits
 Bootcamp class material helped. 
