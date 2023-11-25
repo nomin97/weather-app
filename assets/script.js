@@ -5,7 +5,7 @@ var city = "Denver"
 var date = moment().format('dddd, MMMM Do YYYY');
 var dateTime = moment().format('YYYY-MM-DD HH:MM:SS')
 
-var cityHist = [];
+var cityHistory = [];
 //Will save the text value of the search and save it to an array and storage
 $('.search').on("click", function (event) {
 	event.preventDefault();
@@ -13,29 +13,29 @@ $('.search').on("click", function (event) {
 	if (city === "") {
 		return;
 	};
-	cityHist.push(city);
+	cityHistory.push(city);
 
-	localStorage.setItem('city', JSON.stringify(cityHist));
+	localStorage.setItem('city', JSON.stringify(cityHistory));
 	fiveForecastEl.empty();
 	getHistory();
 	getWeatherToday();
 });
 
 //Will create buttons based on search history 
-var contHistEl = $('.cityHist');
+var contHistoryEl = $('.cityHistory');
 function getHistory() {
-	contHistEl.empty();
+	contHistoryEl.empty();
 
-	for (let i = 0; i < cityHist.length; i++) {
+	for (let i = 0; i < cityHistory.length; i++) {
 
 		var rowEl = $('<row>');
-		var btnEl = $('<button>').text(`${cityHist[i]}`)
+		var btnEl = $('<button>').text(`${cityHistory[i]}`)
 
 		rowEl.addClass('row histBtnRow');
 		btnEl.addClass('btn btn-outline-secondary histBtn');
 		btnEl.attr('type', 'button');
 
-		contHistEl.prepend(rowEl);
+		contHistoryEl.prepend(rowEl);
 		rowEl.append(btnEl);
 	} if (!city) {
 		return;
@@ -176,10 +176,10 @@ function getFiveDayForecast() {
 //Allows for the example data to load for Denver
 function initLoad() {
 
-	var cityHistStore = JSON.parse(localStorage.getItem('city'));
+	var cityHistoryStore = JSON.parse(localStorage.getItem('city'));
 
-	if (cityHistStore !== null) {
-		cityHist = cityHistStore
+	if (cityHistoryStore !== null) {
+		cityHistory = cityHistoryStore
 	}
 	getHistory();
 	getWeatherToday();

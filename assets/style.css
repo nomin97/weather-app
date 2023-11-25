@@ -1,16 +1,26 @@
 :root {
     --primary: #ffffff;
-    --secondary: #60a9f8;
-    --tertiary: #972e0e;
-    --light-dark: #d1836d;
+    --secondary: #b33f04;
     --dark: #09219a;
     --border-radius: .3rem;
 }
+
 * {
     box-sizing: border-box;
-  }
+    margin: 15px;
+}
 
-  body {
+.hero {
+    padding: 35px;
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.hero p {
+    max-width: 75%;
+}
+
+body {
     background-color: var(--primary);
     margin: 0;
     padding: 0;
@@ -18,19 +28,13 @@
     color: var(--dark);
     line-height: 1.5;
     font-size: 16px;
-  }
-  
-
-h1 {
-    background-color: var(--dark);
-    text-align: center;
-    color: var(--primary);
 }
 
-label {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 20px;
+h1 {
+    font-weight: 700;
+    margin: 0;
+    color: var(--dark);
+    line-height: 1.25;
 }
 
 .card {
@@ -42,20 +46,10 @@ label {
     color: var(--primary);
     background-color: var(--dark);
     padding: 2.5%;
-    border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
 }
 
 .card-body {
     padding: 2.5%;
-}
-
-.colOne {
-    background-color: white;
-    /* darkkhaki */
-}
-
-.colTwo {
-    background-color: rgb(255, 255, 255);
 }
 
 .histBtnRow {
